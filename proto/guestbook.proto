@@ -1,0 +1,46 @@
+
+syntax = "proto3";
+package guestbook;
+option go_package = "guestbookpb";
+
+
+message Comment {
+    string id = 1;
+    string comment = 2;
+    string full_name = 3;
+    string email= 4;
+}
+
+message CreateCommentReq {
+    string timestamp = 1; // Comment id blank
+}
+
+message CreateCommentRes {
+     string timestamp = 1; // Comment id filled in
+}
+
+
+
+message UpdateCommentReq {
+    string timestamp = 1;
+}
+
+message UpdateCommentRes {
+    string timestamp = 1;
+}
+
+message DeleteCommentReq {
+    string timestamp = 1;
+}
+
+message DeleteCommentRes {
+    bool success = 1;
+}
+
+
+
+service CommentService {
+    rpc CreateComment(CreateCommentReq) returns (CreateCommentRes);
+    rpc UpdateComment(UpdateCommentReq) returns (UpdateCommentRes);
+    rpc DeleteComment(DeleteCommentReq) returns (DeleteCommentRes);
+}

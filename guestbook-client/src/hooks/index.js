@@ -1,6 +1,7 @@
 import { useState } from "react";
-import * as commentsService from "../services";
 import moment from "moment";
+import * as commentsService from "../services";
+import { createComment, updateComment, deleteComment } from "../api";
 
 export function usePersistedState(key) {
   const commentsFromStorage = commentsService.getItemByKey(key);
@@ -11,13 +12,14 @@ export function usePersistedState(key) {
   const persistedState = commentsService.getParsedItemsByKey(key);
 
   return {
-    handleAction: (data, action) => {
+    handleAction: async (data, action) => {
       switch (action) {
         case "submit":
           data.id = +new Date();
           data.created_at = moment(data.id).format("DD-MM-YYYY HH:mm:ss");
           setter([...comments, data]);
           persistedState.push(data);
+          createComment(data.id);
           commentsService.persistStringifiedItem(key, persistedState);
           break;
         case "update":
@@ -28,6 +30,7 @@ export function usePersistedState(key) {
           data.last_updated = moment(+new Date()).format("DD-MM-YYYY HH:mm:ss");
           filteredComments.push(newComment);
           setter(filteredComments);
+          updateComment(String(+new Date()));
           commentsService.persistStringifiedItem(key, filteredComments);
           break;
         default:
@@ -37,6 +40,7 @@ export function usePersistedState(key) {
     deleteComment: data => {
       const filteredComments = comments.filter(comment => comment.id !== data);
       setter(filteredComments);
+      deleteComment(String(+new Date()));
       commentsService.persistStringifiedItem(key, filteredComments);
     },
     comments
