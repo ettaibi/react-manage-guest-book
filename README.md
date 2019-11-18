@@ -22,7 +22,7 @@ sudo docker run  -p 8080:8080 envoy:v1
 Generate protos and js grpc web pb
 
 ```
-make install
+make gen
 ```
 
 Before running react app you need to go to the generated files under `guestbook-client/src/client/proto/`. then add `/*eslint-disable*/` at the top of all generated files.
