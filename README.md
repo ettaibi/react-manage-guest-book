@@ -28,6 +28,6 @@ make gen
 Before running react app you need to go to the generated files under `guestbook-client/src/client/proto/`. then add `/*eslint-disable*/` at the top of all generated files.
 
 ```
-yarn add
+yarn 
 yarn start
 ```
