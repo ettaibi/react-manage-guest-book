@@ -2,7 +2,7 @@
 
 React example for managing a guest book, using hooks, and GRPC-WEB with a golang backend
 
-A comment is persisted in local storage, and a log message is shown in backend for CUD apps.
+A comment is persisted in local storage, and a log message is shown in backend for CUD operations.
 
 to run the server
 
